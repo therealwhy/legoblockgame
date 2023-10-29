@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #timer {
+        color: black;
+        margin-left: 33vw;
+        font-size: 2vh;
+    }
+    #tab {
+      border-collapse: collapse;
+      border-radius: 100%;
+      display: table;
+      height: 96vw;
+      margin: 0;
+      width: 96vw;
+    }
+
+
+    #tab > div.R{
+      display: table-row;
+
+    }
+    #tab > div.R > div {
+      display: table-cell;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      vertical-align: middle;
+    }
+    #tab > div.R > div {
+      position: relative;
+      width: 32vw;
+    }
+    #tab > div.R > div:before {
+        box-sizing: border-box;
+        border-width: .75vw;
+      border-style:  solid;
+      content: "\002D54   \002D54 \A \002D54   \002D54";
+      display: block;
+      font-size: 10vw;
+      height: 30.5vw;
+      line-height: 15vw;
+      top: 0.25vw;
+      margin: .25vw;
+      padding: 0;
+      position: absolute;
+      white-space: pre-wrap;
+
+      width: 30.5vw;
+      z-index: -1;
+    }
+
+    @media screen and (orientation:landscape) {
+        #tab {
+            height: 96vh;
+            width: 96vh;
+        }
+        #tab > div.R > div:before {
+        border-width: .75vh;
+      font-size: 10vh;
+      height: 30.5vh;
+      line-height: 15vh;
+      top: 0.25vh;
+      margin: .25vh;
+      width: 30.5vh;
+    }
+    #tab > div.R > div {
+      width: 32vh;
+    }
+    }    
+
+    div.r:before {
+        color: #C91A09;
+        border-color: #C91A09;
+        background-color: rgba(201, 26, 9, 0.5);
+    }
+    div.o:before {
+        color: 	#FE8A18;
+        border-color: 	#FE8A18;
+        background-color: rgba(254, 138, 24, 0.5);
+    }
+    div.y:before {
+        color: #F2CD37;
+        border-color: #F2CD37;
+        background-color: rgba(242, 205, 55, 0.5);
+    }
+    div.l:before {
+        color: #BBE90B;
+        border-color: #BBE90B;
+        background-color: rgba(187, 233, 11, 0.5);
+    }
+    div.g:before {
+        color: #237841;
+        border-color: #237841;
+        background-color: rgba(35, 120, 65, 0.5);
+    }
+    div.b:before {
+        color: #0055BF;
+        border-color: #0055BF;
+        background-color: rgba(0, 85, 191, 0.5);
+    }
+  </style>
+  </style>
+</head>
+<body>
+  <div id="timer"></div>
+  <div id="tab"></div>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+  <script>
+    const max = 3 ;
+    const colors = "roylgb".split('')
+    const colorCount = colors.length;
+    const arr = Array.from(Array(max).keys());
+    const start=Date.now();
+    const $Timer = $("#timer");
+    const $tab = $("#tab");
+    arr.forEach((element) => {
+      const $tr = $('<div class="R"/>');
+      arr.forEach((element) => {
+        $tr.append($("<div />").addClass(colors[Math.floor(Math.random() * colorCount)]));
+      });
+      $tab.append($tr);
+    });
+    const Timer = setInterval(function() {
+        $Timer.text(Math.round((Date.now() - start) /10)/100);
+    }, 10)
+    $tab.on("click", function() {
+        clearInterval(Timer);
+        setTimeout(function() {location.reload()}, 2000);
+    });
+  </script>
+</body>
